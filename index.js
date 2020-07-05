@@ -52,6 +52,18 @@ var App = /** @class */ (function () {
         };
         xhr.send();
     };
+    App.prototype.getRengeeringFonts = function (apiKey) {
+        var _this = this;
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', 'http://dev.rengineering.io/rengineering-fonts.json', true);
+        xhr.onloadend = function () {
+            _this.fontList = JSON.parse(xhr.responseText);
+            _this.fontList.items.forEach(function (font) { return _this.addOption(_this.selectFamily, font.family); });
+            _this.loadVariants();
+            _this.handleEvents();
+        };
+        xhr.send();
+    };
     App.prototype.render = function (fontIndex, variantIndex, text, size, union, separate, bezierAccuracy) {
         var _this = this;
         var f = this.fontList.items[fontIndex];
@@ -75,5 +87,6 @@ var App = /** @class */ (function () {
 var app = new App();
 window.onload = function () {
     app.init();
-    app.getGoogleFonts('AIzaSyAOES8EmKhuJEnsn9kS1XKBpxxp-TgN8Jc');
+    //app.getGoogleFonts('AIzaSyAOES8EmKhuJEnsn9kS1XKBpxxp-TgN8Jc');
+	app.getRengeeringFonts();
 };
