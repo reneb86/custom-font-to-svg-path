@@ -55,7 +55,7 @@ var App = /** @class */ (function () {
     App.prototype.getRengeeringFonts = function (apiKey) {
         var _this = this;
         var xhr = new XMLHttpRequest();
-        xhr.open('get', 'http://dev.rengineering.io/rengineering-fonts.json', true);
+        xhr.open('get', 'https://dev.rengineering.io/rengineering-fonts.json', true);
         xhr.onloadend = function () {
             _this.fontList = JSON.parse(xhr.responseText);
             _this.fontList.items.forEach(function (font) { return _this.addOption(_this.selectFamily, font.family); });
